@@ -25,12 +25,12 @@ public class TomcatLauncher {
             connector.setPort(8080);
             tomcat.setConnector(connector);
 
-            Context ctx = tomcat.addContext("", null);
-            Wrapper servlet = Tomcat.addServlet(ctx, "MainServlet", new MainServlet());
-            servlet.setLoadOnStartup(1);
-            servlet.addMapping("/");
-            //tomcat.getHost().setAppBase(".");
-            //tomcat.addWebapp("",".");
+            //Context ctx = tomcat.addContext("", null);
+            //Wrapper servlet = Tomcat.addServlet(ctx, "MainServlet", new MainServlet());
+            //servlet.setLoadOnStartup(1);
+            //servlet.addMapping("/");
+            tomcat.getHost().setAppBase(".");
+            tomcat.addWebapp("",".");
 
             tomcat.start();
             tomcat.getServer().await();
