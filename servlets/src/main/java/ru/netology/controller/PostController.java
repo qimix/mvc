@@ -2,46 +2,41 @@ package ru.netology.controller;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import ru.netology.model.Post;
 import ru.netology.service.PostService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
-@Controller
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/posts")
 public class PostController {
-    public static final String APPLICATION_JSON = "application/json";
     private final PostService service;
 
     public PostController(PostService service) {
         this.service = service;
     }
 
-    public void all(HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var data = service.all();
-        final var gson = new Gson();
-        response.getWriter().print(gson.toJson(data));
+    @GetMapping()
+    public Map<Long, Post> all() throws IOException {
+        return service.all();
     }
 
-    public void getById(long id, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        response.getOutputStream().print(String.valueOf(service.getById(id).getContent()));
-        // TODO: deserialize request & serialize response
+    @GetMapping("/{id}")
+    public Post getById(@PathVariable long id) throws IOException {
+        return service.getById(id);
     }
 
-    public void save(Reader body, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var gson = new Gson();
-        final var post = gson.fromJson(body, Post.class);
-        final var data = service.save(post);
-        response.getOutputStream().print(String.valueOf(data.getContent()));
+    @PostMapping()
+    public Post save(Post post) throws IOException {
+        return service.save(post);
     }
 
-    public void removeById(long id, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        response.getOutputStream().print(String.valueOf(service.getById(id).getContent() + " - deleted"));
+    @DeleteMapping("/id")
+    public void removeById(long id) throws IOException {
         service.removeById(id);
-        // TODO: deserialize request & serialize response
     }
 }

@@ -1,5 +1,6 @@
 package ru.netology.servlet;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.netology.controller.PostController;
 import ru.netology.repository.PostRepository;
 import ru.netology.service.PostService;
@@ -33,12 +34,14 @@ public class MainServlet extends HttpServlet {
       method = req.getMethod();
       param = req.getParameter("id");
       // primitive routing
-      if (method.equals("GET") && path.equals("/api/posts") && param == null) {
+
+
+/*      if (method.equals("GET") && path.equals("/api/posts") && param == null) {
         controller.all(resp);
         return;
-      }
-      if (method.equals("GET") && path.matches("/api/posts") && !(param == null)) {
-        // easy way
+      }*/
+     // if (method.equals("GET") && path.matches("/api/posts") && !(param == null)) {
+/*        // easy way
         final var id = Long.parseLong(param);
         controller.getById(id, resp);
         return;
@@ -52,8 +55,8 @@ public class MainServlet extends HttpServlet {
         final var id = Long.parseLong(param);
         controller.removeById(id, resp);
         return;
-      }
-      resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+      }*/
+      //resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     } catch (Exception e) {
       e.printStackTrace();
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
