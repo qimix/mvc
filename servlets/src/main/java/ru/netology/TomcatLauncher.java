@@ -1,4 +1,4 @@
-package ru.netology.tomcat;
+package ru.netology;
 
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;

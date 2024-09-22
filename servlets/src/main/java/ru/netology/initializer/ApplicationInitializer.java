@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.initializer;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
