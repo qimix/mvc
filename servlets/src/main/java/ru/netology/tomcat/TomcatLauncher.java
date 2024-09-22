@@ -1,14 +1,9 @@
 package ru.netology.tomcat;
 
-import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
-import org.apache.catalina.Wrapper;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
-import org.apache.catalina.startup.VersionLoggerListener;
-import ru.netology.servlet.MainServlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +21,7 @@ public class TomcatLauncher {
             tomcat.setConnector(connector);
 
             tomcat.getHost().setAppBase(".");
-            tomcat.addWebapp("",".");
+            tomcat.addWebapp("", ".");
 
             tomcat.start();
             tomcat.getServer().await();

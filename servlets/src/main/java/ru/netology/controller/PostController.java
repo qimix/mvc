@@ -1,6 +1,7 @@
 package ru.netology.controller;
 
 import com.google.gson.Gson;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.netology.model.Post;
@@ -20,23 +21,23 @@ public class PostController {
         this.service = service;
     }
 
-    @GetMapping()
-    public Map<Long, Post> all() throws IOException {
+    @GetMapping
+    public Map<Long, Post> all() {
         return service.all();
     }
 
     @GetMapping("/{id}")
-    public Post getById(@PathVariable long id) throws IOException {
+    public Post getById(@PathVariable long id) {
         return service.getById(id);
     }
 
-    @PostMapping()
-    public Post save(Post post) throws IOException {
+    @PostMapping
+    public Post save(Post post) {
         return service.save(post);
     }
 
-    @DeleteMapping("/id")
-    public void removeById(long id) throws IOException {
+    @DeleteMapping("/{id}")
+    public void removeById(@PathVariable long id) {
         service.removeById(id);
     }
 }
